@@ -12,8 +12,9 @@ avg_price = client.get_avg_price(symbol='BTCUSDT')
 tickers = client.get_ticker()
 
 orders = client.get_all_orders(symbol='ADAUSDT')
+baban = client.get_historical_klines("ETHUSDT", Client.KLINE_INTERVAL_1DAY, "Fri, 01 Oct 2021 00:00:00 GMT")
 
-with open('ETH2017data.json', 'w') as j:
-    b = json.dumps(pastcandles, indent=4)
-    j.write(b)
-    j.close()
+
+
+
+
