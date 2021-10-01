@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 from flask import Flask, render_template, send_from_directory,url_for
@@ -23,26 +24,36 @@ def create_app(config=Config):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
+    error = None
     client = Client(Config.API_KEY, Config.API_SECRET)
-    res = client.get_exchange_info()
+    # res = client.get_exchange_info()
+    serverTimereq = client.get_server_time()
+    serverTimeUTC = datetime.datetime.utcfromtimestamp(serverTimereq['serverTime']/1000)
+    systemstatus = client.get_system_status()
+    if systemstatus['status'] != 0 and systemstatus['msg'] != 'normal':
+        error = 'System is offline'
 
     # a simple page that says hello
     @app.route('/hello')
     def hello():
-        print(client.ping())
-
         return 'Hello, World!'
 
     @app.route('/')
     def index():
-        return render_template('index.html', data='yarrak')
+        if error is not None:
+            generalinfo = error
+
+        generalinfo={
+            'Server Time UTC': serverTimeUTC,
+            'System Status': systemstatus
+        }
+        return render_template('index.html', data=generalinfo)
 
 
 
-    @app.route('/product_images/<filename>')
-    def upload(filename):
-        return send_from_directory(app.config['UPLOAD_PATH'], filename)
+    # @app.route('/product_images/<filename>')
+    # def upload(filename):
+    #     return send_from_directory(app.config['UPLOAD_PATH'], filename)
 
     # from . import auth
     # app.register_blueprint(auth.bp)
