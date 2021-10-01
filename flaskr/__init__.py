@@ -27,8 +27,7 @@ def create_app(config=Config):
     error = None
     client = Client(Config.API_KEY, Config.API_SECRET)
     # res = client.get_exchange_info()
-    serverTimereq = client.get_server_time()
-    serverTimeUTC = datetime.datetime.utcfromtimestamp(serverTimereq['serverTime']/1000)
+
     systemstatus = client.get_system_status()
     if systemstatus['status'] != 0 and systemstatus['msg'] != 'normal':
         error = 'System is offline'
@@ -42,11 +41,13 @@ def create_app(config=Config):
     def index():
         if error is not None:
             generalinfo = error
-
+        serverTimereq = client.get_server_time()
+        serverTimeUTC = datetime.datetime.utcfromtimestamp(serverTimereq['serverTime'] / 1000)
         generalinfo={
             'Server Time UTC': serverTimeUTC,
             'System Status': systemstatus
         }
+        # TODO remember to make time refresh with JS
         return render_template('index.html', data=generalinfo)
 
 
@@ -55,8 +56,8 @@ def create_app(config=Config):
     # def upload(filename):
     #     return send_from_directory(app.config['UPLOAD_PATH'], filename)
 
-    # from . import auth
-    # app.register_blueprint(auth.bp)
+    from . import orderinfo
+    app.register_blueprint(orderinfo.bp)
 
 
 
