@@ -2,9 +2,9 @@
 
 create a conifg.py looks like this
 
-class Config(object):
+    class Config(object):
 
-    API_KEY = 'aaaaaa'
+        API_KEY = 'aaaaaa'
 
-    API_SECRET = 'aaaaaa'
+        API_SECRET = 'aaaaaa'
 
