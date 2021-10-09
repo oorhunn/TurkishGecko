@@ -2,16 +2,16 @@
 {% block content %}
 <body>
 <h3>Check Infos</h3>
-
-<h4>Start Date is: {{session['startdate']}}</h4>
-<h4>End Date is: {{session['enddate']}}</h4>
-<h4>Coin {{session['coin']}}</h4>
-<h4>Interval {{session['interval']}}</h4>
-<form action="" method='POST' name="myform">
-    {{ form.csrt_token }}
-
-    <input type="button" name="accept" value="accept">
-    <input type="button" name="decline" value="decline">
+<head>
+    <title>Form</title>
+</head>
+<p>{{ data }}</p>
+<form action="/succes">
+    <input type="submit" value="Accept">
+</form>
+<form action="/dataref/">
+    <input type="submit" value="Decline">
 </form>
 </body>
 {% endblock %}
+

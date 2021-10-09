@@ -26,14 +26,16 @@ def dataref():
 
 @bp.route('/check', methods=('GET', 'POST'))
 def check():
-    form = forms.DatarefForm()
-    startdate = session['startdate']
-    enddate = session['enddate']
-    coin = session['coin']
-    interval = session['interval']
-    if request.method == 'POST':
-        if request.form['accept'] == 'accept':
-            return redirect('succes')
-        elif request.method['decline'] == 'decline':
-            return redirect('dataref')
+    checkdata = {
+        'startdate ': session['startdate'],
+        'enddate': session['enddate'],
+        'coin': session['coin'],
+        'interval': session['interval']
+    }
+    # startdate = session['startdate']
+    # enddate = session['enddate']
+    # coin = session['coin']
+    # interval = session['interval']
+    return render_template('dataline/check.html', data=checkdata)
+
 
