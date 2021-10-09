@@ -4,6 +4,7 @@ import os
 from flask import Flask, render_template, session,send_from_directory, url_for, request, redirect
 from config import Config
 from binance.client import Client
+import utilfuncs
 
 import forms
 
@@ -47,6 +48,13 @@ def create_app(config=Config):
         print(session)
         # TODO remember to make time refresh with JS
         return render_template('index.html', data=generalinfo)
+    @app.route('/download')
+    def download():
+        interval = session['interval']
+        coin = session['coin']
+        startdate= session['startdate']
+        utilfuncs.getcoindata(coin=coin, interval=interval, startdate=startdate)
+        return redirect('succes')
 
 
 
