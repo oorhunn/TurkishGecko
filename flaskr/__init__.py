@@ -49,13 +49,15 @@ def create_app(config=Config):
         print(session)
         # TODO remember to make time refresh with JS
         return render_template('index.html', data=generalinfo)
+
     @app.route('/download')
     def download():
         interval = session['interval']
         coin = session['coin']
         startdate= session['startdate']
-        utilfuncs.getcoindata(coin=coin, interval=interval, startdate=startdate)
+        utilfuncs.GetCoinData(coin=coin, interval=interval, startdate=startdate)
         return redirect('succes')
+
 
     # @app.route('/product_images/<filename>')
     # def upload(filename):
