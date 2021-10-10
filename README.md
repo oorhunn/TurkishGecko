@@ -1,6 +1,6 @@
 # This repo is for only side hustlers
 
-create a conifg.py looks like this
+create a conifg.py that looks like this
     
     COIN_CHOICES = [('ETHUSDT'), ('BTCUSDT')]
     INTERVAL_CHOICES = [ ('15MIN'), ('1HOUR'),('4HOUR'),('1DAY')]

@@ -5,8 +5,9 @@ from flask import Flask, render_template, session,send_from_directory, url_for, 
 from config import Config
 from binance.client import Client
 import utilfuncs
-
 import forms
+
+# TODO implement pandas, ta, find out how to use indicators and how to create pandas datatable
 
 def create_app(config=Config):
     # create and configure the app
@@ -55,9 +56,6 @@ def create_app(config=Config):
         startdate= session['startdate']
         utilfuncs.getcoindata(coin=coin, interval=interval, startdate=startdate)
         return redirect('succes')
-
-
-
 
     # @app.route('/product_images/<filename>')
     # def upload(filename):
