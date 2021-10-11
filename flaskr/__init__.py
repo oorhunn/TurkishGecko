@@ -54,9 +54,10 @@ def create_app(config=Config):
     def download():
         interval = session['interval']
         coin = session['coin']
-        startdate= session['startdate']
+        startdate = session['startdate']
         utilfuncs.GetCoinData(coin=coin, interval=interval, startdate=startdate)
         return redirect('succes')
+
 
 
     # @app.route('/product_images/<filename>')
@@ -68,5 +69,8 @@ def create_app(config=Config):
 
     from . import dataref
     app.register_blueprint(dataref.bp)
+
+    from . import process
+    app.register_blueprint(process.bp)
 
     return app

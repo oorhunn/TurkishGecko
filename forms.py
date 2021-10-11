@@ -1,9 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired
-from wtforms import validators, SubmitField, StringField, SelectField
+from wtforms import validators, SubmitField, SelectField
 import config
-
 
 
 class DatarefForm(FlaskForm):

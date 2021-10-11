@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Process</title>
+</head>
+<body>
+<p>Choose data for process</p>
+
+{% for i in data %}
+<a href="{{ url_for('process.basicpreprocess', filename=i) }}">{{ i }}</a>
+<br>
+{% endfor %}
+
+
+</body>
+</html>
