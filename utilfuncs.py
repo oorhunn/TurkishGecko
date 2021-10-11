@@ -5,6 +5,7 @@ import datetime
 import string
 import pandas as pd
 
+
 # For getting KLine data from binance.api
 def GetCoinData(coin, interval, startdate):
     client = Client(Config.API_KEY, Config.API_SECRET)
@@ -19,7 +20,7 @@ def GetCoinData(coin, interval, startdate):
     else:
         return 'something went wrong'
     temp = startdate.translate({ord(c): None for c in string.whitespace})
-    name = 'coindata/' + coin + str(interval) + str(temp[4:13]) + '.json'
+    name = 'coindata/rawdata/' + coin + str(interval) + str(temp[4:13]) + '.json'
     with open(name, '+w') as f:
         b = json.dumps(data, indent=4)
         f.write(b)
@@ -27,7 +28,7 @@ def GetCoinData(coin, interval, startdate):
 
 
 # This function is used for basic simplification of KLine data
-# It`s returning Open Time, Open, High, Low, Close, Volume in pandas dataframe
+# It`s saves Open Time, Open, High, Low, Close, Volume in pandas dataframe as .csv file in coindata/preprocessed/
 def BasicPreprocess(file):
     temp = open(file)
     tempdata = json.load(temp)
@@ -39,7 +40,8 @@ def BasicPreprocess(file):
     Cvolume = []
     i = 0
     while i < len(tempdata):
-        Copentime.append(tempdata[i][0])
+        dd = datetime.datetime.utcfromtimestamp(tempdata[i][0] / 1000)
+        Copentime.append(dd)
         Copen.append(tempdata[i][1])
         Chigh.append(tempdata[i][2])
         Clow.append(tempdata[i][3])
@@ -56,4 +58,8 @@ def BasicPreprocess(file):
     }
     del tempdata
     df = pd.DataFrame(data)
-    return df
+    tempnameA = file.strip('coindata/rawdata/')
+    tempnameB = 'coindata/preprocessed/' + tempnameA.strip('.json') + '.csv'
+    df.to_csv(tempnameB)
+
+
