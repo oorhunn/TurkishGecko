@@ -6,6 +6,12 @@ from config import Config
 from binance.client import Client
 import utilfuncs
 import forms
+import io
+import random
+from flask import Response
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+from services.binance_service import binance_service
 
 # TODO implement pandas, ta, find out how to use indicators and how to create pandas datatable
 
@@ -26,7 +32,8 @@ def create_app(config=Config):
     except OSError:
         pass
     error = None
-    client = Client(Config.API_KEY, Config.API_SECRET)
+    binance_service.init_app(Config)
+    client = binance_service.get_client()
     # res = client.get_exchange_info()
     systemstatus = client.get_system_status()
     if systemstatus['status'] != 0 and systemstatus['msg'] != 'normal':
@@ -50,6 +57,7 @@ def create_app(config=Config):
         # TODO remember to make time refresh with JS
         return render_template('index.html', data=generalinfo)
 
+# Download endpoint. It gets values from session
     @app.route('/download')
     def download():
         interval = session['interval']
@@ -58,6 +66,20 @@ def create_app(config=Config):
         utilfuncs.GetCoinData(coin=coin, interval=interval, startdate=startdate)
         return redirect('succes')
 
+    # @app.route('/plot.png')
+    # def plot_png():
+    #     fig = create_figure()
+    #     output = io.BytesIO()
+    #     FigureCanvas(fig).print_png(output)
+    #     return Response(output.getvalue(), mimetype='image/png')
+    #
+    # def create_figure():
+    #     fig = Figure()
+    #     axis = fig.add_subplot(1, 1, 1)
+    #     xs = range(100)
+    #     ys = [random.randint(1, 50) for x in xs]
+    #     axis.plot(xs, ys)
+    #     return fig
 
 
     # @app.route('/product_images/<filename>')

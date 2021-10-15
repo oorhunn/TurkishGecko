@@ -2,7 +2,7 @@ import pandas as pd
 
 
 # For calculating the Simple Moving Average (MA)
-def MA(data, period, column='Close'):
-    return data[column].rolling(window=period).mean()
+def MA(df, period, column='Close'):
+    return df[column].rolling(window=period).mean()
 
 
