@@ -9,6 +9,7 @@ import forms
 from os import listdir
 from os.path import isfile, join
 import utilfuncs
+from services import data_preprocess
 
 
 bp = Blueprint('process', __name__, url_prefix='/process')
@@ -27,7 +28,7 @@ def index():
 @bp.route('/basicpreprocess/<string:filename>')
 def basicpreprocess(filename):
     path = 'coindata/rawdata/' + filename
-    utilfuncs.BasicPreprocess(path)
+    data_preprocess.basic_preprocess(path)
     return 'succes'
 
 

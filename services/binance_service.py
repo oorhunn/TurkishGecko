@@ -33,5 +33,6 @@ class BinanceService():
             f.write(b)
             f.close()
 
-
+    def prophet(self):
+        return 'aa'
 binance_service = BinanceService()
