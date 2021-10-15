@@ -63,7 +63,7 @@ def create_app(config=Config):
         interval = session['interval']
         coin = session['coin']
         startdate = session['startdate']
-        utilfuncs.GetCoinData(coin=coin, interval=interval, startdate=startdate)
+        binance_service.get_coin_data(coin, interval, startdate)
         return redirect('succes')
 
     # @app.route('/plot.png')

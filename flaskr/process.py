@@ -31,7 +31,7 @@ def basicpreprocess(filename):
     return 'succes'
 
 
-@bp.route('/prophetpreprocess/<string:filename')
+@bp.route('/prophetpreprocess/<string:filename>')
 def prophetpreprocess(filename):
 
 
