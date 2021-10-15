@@ -5,6 +5,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 import forms
+from services.binance_service import binance_service
 
 bp = Blueprint('dataref', __name__, url_prefix='/dataref')
 
@@ -38,4 +39,10 @@ def check():
     # interval = session['interval']
     return render_template('dataline/check.html', data=checkdata)
 
-
+@bp.route('/download', methods=('GET','POST'))
+def download():
+    interval = session['interval']
+    coin = session['coin']
+    startdate = session['startdate']
+    binance_service.get_coin_data(coin, interval, startdate)
+    return redirect('/')

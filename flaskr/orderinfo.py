@@ -8,6 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 bp = Blueprint('orderinfo', __name__, url_prefix='/orderinfo')
 
+
 @bp.route('/orders', methods=('GET', 'POST'))
 def orders():
     # Example return for candles = client.get_klines(symbol='BTCUSDT', interval=Client.KLINE_INTERVAL_1MONTH)

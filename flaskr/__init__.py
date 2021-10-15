@@ -57,15 +57,6 @@ def create_app(config=Config):
         # TODO remember to make time refresh with JS
         return render_template('index.html', data=generalinfo)
 
-# Download endpoint. It gets values from session
-    @app.route('/download')
-    def download():
-        interval = session['interval']
-        coin = session['coin']
-        startdate = session['startdate']
-        binance_service.get_coin_data(coin, interval, startdate)
-        return redirect('succes')
-
     # @app.route('/plot.png')
     # def plot_png():
     #     fig = create_figure()
