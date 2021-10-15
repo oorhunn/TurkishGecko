@@ -60,18 +60,7 @@ datapath = 'coindata/preprocessed/ETHUSDT1DAY01Jan2017.csv'
 # plt.xlabel('Date', fontsize=18)
 # plt.ylabel('Close Price', fontsize=18)
 # plt.show()
-df = pd.read_csv(datapath)
 
-
-dftest = df.iloc[1513:, 1:]
-
-dftrain = df.iloc[:1513, 1:]
-
-# m.fit(df)
-# future = m.make_future_dataframe(periods=365)
-# future.tail()
-# forecast = m.predict(future)
-# forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
 
 
 

@@ -29,3 +29,10 @@ def basicpreprocess(filename):
     path = 'coindata/rawdata/' + filename
     utilfuncs.BasicPreprocess(path)
     return 'succes'
+
+
+@bp.route('/prophetpreprocess/<string:filename')
+def prophetpreprocess(filename):
+
+
+    return filename
