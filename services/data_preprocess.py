@@ -122,10 +122,15 @@ class ProphetProcess:
             nameout = prophet_service.name_returner(len(df), 'D')
         elif str(difference) == '0 days 04:00:00':
             nameout = prophet_service.name_returner(len(df), '4H')
+            df['Volume'] = None
         elif str(difference) == '0 days 01:00:00':
             nameout = prophet_service.name_returner(len(df), '1H')
+            df['Volume'] = None
+
         elif str(difference) == '0 days 00:15:00':
             nameout = prophet_service.name_returner(len(df), '15M')
+            df['Volume'] = None
+
         else:
             nameout = None
         if nameout is not None:
