@@ -1,6 +1,6 @@
 import os
 from flask import (
-    Blueprint, render_template, session
+    Blueprint, render_template, session, redirect
 )
 
 from services import data_preprocess
@@ -47,6 +47,4 @@ def prophetpreprocess():
     year = datetime.now().year
     filename = 'coindata/preprocessed/prophetdata/' + str(coin) + ' ' + str(month) + '-' + str(day) + '-' + str(year) + '.csv'
     result.to_csv(filename)
-    print(result)
-
-    return 'selaminaleykum'
+    return redirect('/succes')
