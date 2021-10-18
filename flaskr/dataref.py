@@ -1,11 +1,9 @@
-import functools
-from datetime import datetime
 from flask import (
-    Blueprint, flash, redirect, render_template, request, session, url_for
+    Blueprint, redirect, render_template, session
 )
-from werkzeug.security import check_password_hash, generate_password_hash
 import forms
 from services.binance_service import binance_service
+
 
 bp = Blueprint('dataref', __name__, url_prefix='/dataref')
 
@@ -39,6 +37,7 @@ def check():
     # interval = session['interval']
     return render_template('dataline/check.html', data=checkdata)
 
+
 @bp.route('/download', methods=('GET','POST'))
 def download():
     interval = session['interval']
@@ -46,3 +45,14 @@ def download():
     startdate = session['startdate']
     binance_service.get_coin_data(coin, interval, startdate)
     return redirect('/')
+
+
+@bp.route('/getprophetdata', methods=('GET','POST'))
+def getprophetdata():
+    form = forms.ProphetForm()
+    if form.validate_on_submit():
+        session['prophet coin'] = form.coin.data
+        return redirect('/process/prophetpreprocess')
+
+    return render_template('dataline/prophet.html', form=form)
+

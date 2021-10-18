@@ -1,44 +1,28 @@
 import json
 from config import Config
 from binance.client import Client
-import datetime
+from datetime import datetime
 import pandas as pd
 import string
+from services.data_preprocess import prophet_service
+from config import Config
+from services.binance_service import binance_service
 
 
-# This function is used for basic simplification of KLine data
-# It`s saves Open Time, Open, High, Low, Close, Volume in pandas dataframe as .csv file in coindata/preprocessed/
-def BasicPreprocess(file):
-    temp = open(file)
-    tempdata = json.load(temp)
-    Copentime = []
-    Chigh = []
-    Clow = []
-    Copen = []
-    Cclose = []
-    Cvolume = []
-    i = 0
-    while i < len(tempdata):
-        dd = datetime.datetime.utcfromtimestamp(tempdata[i][0] / 1000)
-        Copentime.append(dd)
-        Copen.append(tempdata[i][1])
-        Chigh.append(tempdata[i][2])
-        Clow.append(tempdata[i][3])
-        Cclose.append(tempdata[i][4])
-        Cvolume.append(tempdata[i][5])
-        i = i + 1
-    data = {
-        'Open Time': Copentime,
-        'Open': Copen,
-        'High': Chigh,
-        'Low': Clow,
-        'Close': Cclose,
-        'Volume': Cvolume
-    }
-    del tempdata
-    df = pd.DataFrame(data)
-    tempnameA = file.strip('coindata/rawdata/')
-    tempnameB = 'coindata/preprocessed/' + tempnameA.strip('.json') + '.csv'
-    df.to_csv(tempnameB)
 
+datapath = 'coindata/preprocessed/ETHUSDT1DAY01Jan2017.csv'
+
+# df = pd.read_csv(datapath)
+# df['Year'] = pd.DatetimeIndex(df['Open Time']).year
+#
+# datanow = df['Open Time'].tail(1)
+# now = datetime.utcnow()
+# anan = df['Year'].tail(5)
+# print(anan)
+
+# df = prophet_service.get_local_data(datapath=datapath)
+# if isinstance(df, pd.DataFrame):
+#     print('aaa')
+# else:
+#     error, value = df
 

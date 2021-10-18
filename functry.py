@@ -9,6 +9,7 @@ from ta import add_all_ta_features
 import utilfuncs
 import indicators
 import numpy as np
+import matplotlib.pyplot as plt
 # client = Client(Config.API_KEY, Config.API_SECRET)
 
 # candles = client.get_klines(symbol='BTCUSDT', interval=Client.KLINE_INTERVAL_1MONTH)
@@ -22,8 +23,8 @@ import numpy as np
 
 
 
-datapath = 'coindata/preprocessed/ETHUSDT1DAY01Jan2017.csv'
-
+# datapath = 'coindata/preprocessed/ETHUSDT1DAY01Jan2017.csv'
+#
 # df = pd.read_csv(datapath)
 # df['MA14'] = indicators.MA(df, period=14)
 # df['MA50'] = indicators.MA(df, period=50)
@@ -60,8 +61,13 @@ datapath = 'coindata/preprocessed/ETHUSDT1DAY01Jan2017.csv'
 # plt.xlabel('Date', fontsize=18)
 # plt.ylabel('Close Price', fontsize=18)
 # plt.show()
-
-
-
+# first = datetime.datetime.utcfromtimestamp(1633132800000 / 1000)
+# second = datetime.datetime.utcfromtimestamp(1633219199999 / 1000)
+# third = datetime.datetime.utcfromtimestamp(1634428799999 / 1000)
+#
+# print('first', first)
+# print('second', second)
+# print('third', third)
+#
 
 

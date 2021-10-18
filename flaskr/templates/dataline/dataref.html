@@ -2,6 +2,9 @@
 {% block content %}
 <body>
 <h3> Select a date range </h3>
+<a href="/dataref/getprophetdata">Click for prophet data</a>
+<br>
+<br>
 <form action="" method='POST' name="myform">
     {{ form.csrt_token }}
     {{ form.startdate.label }} {{form.startdate(class='datepicker')}} {{form.hidden_tag()}}
