@@ -57,6 +57,12 @@ def create_app(config=Config):
         # TODO remember to make time refresh with JS
         return render_template('index.html', data=generalinfo)
 
+
+    @app.route('/prophetdata')
+    def prophet_data():
+        temp = os.listdir('coindata/preprocessed/prophetdata/')
+
+        return  render_template()
     # @app.route('/plot.png')
     # def plot_png():
     #     fig = create_figure()

@@ -69,5 +69,8 @@ import matplotlib.pyplot as plt
 # print('second', second)
 # print('third', third)
 #
+# temp = 'BTCUSDT 10-18-2021.csv'
+# data = temp.split(" ")
+# print(data)
 
 

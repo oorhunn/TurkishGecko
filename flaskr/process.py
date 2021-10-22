@@ -8,14 +8,30 @@ from services.binance_service import binance_service
 from services.data_preprocess import prophet_service, only_basic_pre_process
 import pandas as pd
 from datetime import datetime
+from services.utiltyfunctions import string_to_date_refactor
+from dateutil import parser
+
 
 bp = Blueprint('process', __name__, url_prefix='/process')
 
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
-    temp = os.listdir('coindata/rawdata/')
-    return render_template('process/index.html', data=temp)
+    rawdata = os.listdir('coindata/rawdata/')
+    prophet_data = os.listdir('coindata/preprocessed/prophetdata/')
+    # not_usable_prophet_data = []
+    #
+    # for dat in prophet_data:
+    #     month, day, year = string_to_date_refactor(dat)
+    #     dateval = month + '/' + day + '/' + year
+    #     local_file_date = (parser.parse(dateval)).date()
+    #     today = datetime.today().date()
+    #     if local_file_date != today:
+    #         not_usable_prophet_data.append(dat)
+    #         prophet_data.remove(dat)
+    prophet_data, not_usable_prophet_data = prophet_service.check_local_data(prophet_data)
+
+    return render_template('process/index.html', rawdata=rawdata, prophetdata=prophet_data, not_usable_prophet_data=not_usable_prophet_data)
 
 
 # This route separates full kline data into more simplified version
@@ -31,20 +47,13 @@ def basicpreprocess(filename):
 @bp.route('/prophetpreprocess')
 def prophetpreprocess():
     coin = session['prophet coin']
-    tempdata = binance_service.get_prophet_data(coin)
-    daily = only_basic_pre_process(tempdata['14 Day Daily KLines'])
-    fourhour = only_basic_pre_process(tempdata['7 Day 4Hour KLines'])
-    onehour = only_basic_pre_process(tempdata['4 Day 1Hour KLines'])
-    fiftmins = only_basic_pre_process(tempdata['2 Day 15Min KLines'])
-    prophet_service.refactor_data(daily)
-    prophet_service.refactor_data(fourhour)
-    prophet_service.refactor_data(onehour)
-    prophet_service.refactor_data(fiftmins)
-    frames = [daily, fourhour, onehour, fiftmins]
-    result = pd.concat(frames)
-    day = datetime.now().day
-    month = datetime.now().month
-    year = datetime.now().year
-    filename = 'coindata/preprocessed/prophetdata/' + str(coin) + ' ' + str(month) + '-' + str(day) + '-' + str(year) + '.csv'
-    result.to_csv(filename)
+    prophet_service.get_prophet_data(coin)
     return redirect('/succes')
+
+@bp.route('/updateprophetdata/<string:filename>')
+def update_prophet_data(filename):
+    temp = filename.split(' ')
+    coin = temp[0]
+    prophet_service.get_prophet_data(coin)
+    os.remove('coindata/preprocessed/prophetdata/' + filename)
+    return redirect('/process/')
