@@ -7,7 +7,7 @@
             class Config(object):
                 API_KEY = 'aaaaaa'
                 API_SECRET = 'aaaaaa'
-
+                SECRET_KEY = '#$%^&*'
 # Basic endpoints
 - /dataref/
     - This endpoint can be used for download any coin data from binance.api. You can select from 
