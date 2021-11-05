@@ -12,20 +12,25 @@
 
 - Sistem için gerekli olan python paketlerini aşağıdaki komut ile yükleyin.
 
-		pip install -r requirements.txt
+        pip install -r requirements.txt
 
-- Son olarak Flaskın çalışması için gerekli olan bazı enviromental variable ları sisteme tanıtarak hayırlı olsun aşamasına geçebiliriz.
-	- Ubuntu/MacOs
-	
-			export FLASK_APP=flaskr
-			export FLASK_ENV=development
-			flask run
-	- Windows
-	
-			set FLASK_APP=flaskr
-			set FLASK_ENV=development
-			flask run
+- Make scripti ile uygulama için gerekli docker işlemlerini gerçekleştirmeliyiz. Önce postgre imajı çekelim:
+`docker pull postgres:latest`
+- Daha sonra `make start` komutu ile docker container'kari ayaga kaldiralim, gerekli ENV VARs icin `start-script` dosyasini guncelleyebiliriz.
+- 
 
+- Flaskın çalışması için gerekli olan bazı enviromental variable ları sisteme elle de tanitabiliriz.
+    - Ubuntu/MacOs
+	
+            export FLASK_APP=flaskr
+            export FLASK_ENV=development
+            flask run
+    - Windows
+	
+            set FLASK_APP=flaskr
+            set FLASK_ENV=development
+            flask run
+- Hayırlı olsun aşamasına geçebiliriz.
 # Bazı API endpointleri
 - /dataref/
 	- Bu endpointi kullanarak config.py dosyası içinde tanımlamış olduğumuz birimler için binance.api üzerinden mum verisi indirilebilir.
