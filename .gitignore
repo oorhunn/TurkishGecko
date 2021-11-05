@@ -99,7 +99,7 @@ celerybeat-schedule
 celerybeat.pid
 .idea/
 .DS_Store
-
+.docker/
 # SageMath parsed files
 *.sage.py
 

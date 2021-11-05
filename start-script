@@ -1,0 +1,8 @@
+#!/bin/bash
+until docker exec -it pg-vt psql turk_force -Uuser -c 'select 1;'
+do
+	sleep 5
+    echo "Waiting for db"
+done
+export FLASK_APP=flaskr && export FLASK_ENV=development && export PYTHON_ENV=development && flask run
+#export FLASK_APP=flaskr && export FLASK_ENV=development && export PYTHON_ENV=development && flask db upgrade && flask run
