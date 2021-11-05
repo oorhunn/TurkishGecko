@@ -45,7 +45,7 @@
  
  Burdan yardımcı olabilirsin. 
  
- Ha " Ben daha kripto miripto yeniyim usta " diyosan da bana referral olursan çok sevinirim. %10 sana %10 bana şeklinde bir link bırakıyorum aşağıya hemen. Bu link üzerinden kayıt olursan yaptığın işlemlerdeki işlem ücretinin %10 unu kendine %10 unu da kendine kazandırmış olursun kiii nerden baksan mantıklı iş.
+ Ha " Ben daha kripto miripto yeniyim usta " diyosan da bana referral olursan çok sevinirim. %10 sana %10 bana şeklinde bir link bırakıyorum aşağıya hemen. Bu link üzerinden kayıt olursan yaptığın işlemlerdeki işlem ücretinin %10 unu kendine %10 unu da ekibe kazandırmış olursun kiii nerden baksan mantıklı iş.
  
  https://accounts.binance.me/en/register?ref=M1RRIYQ7
  
