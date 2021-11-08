@@ -1,15 +1,7 @@
 # Bu proje sadece azimle s*** taşı deler diyenler içindir!!!
   Öncelikle se lam lar. Bu proje napsamda ne etsemde şu kripto piyasasını otomatik hale getirsem diyen mühendislerin var olduğunun kanıtıdır. Amaç algoritmik trade yapabilmek için machine learning kullanarak bu alım satım işlerini otomatize edip sandalyede şöyle bir arkaya yaslanmaktır. Eğerki bu yazıyı okudun ve " ULAN bende aynısını yapcaktım" diyosan her türlü katkıya açığız. Pull request atman yeterli. Ama diyosan ki " Ben buraya katkı için değil sizin sistemi bi deniyip çalışıyosa kullanmaya geldim."  tamam sıkantı yok tepe tepe kullan. 
 # Basitçe Kurulumu
-- conifg.py isimli bir dosya oluşturun ve içine alttaki yapıyı koruyarak kendi bilgilerinizi ve birim seçimlerinizi yerleştirin.
-    
-        COIN_CHOICES = [('ETHUSDT'), ('BTCUSDT')]
-        INTERVAL_CHOICES = [ ('15MIN'), ('1HOUR'),('4HOUR'),('1DAY')]
-            class Config(object):
-                API_KEY = 'aaaaaa'
-                API_SECRET = 'aaaaaa'
-                SECRET_KEY = '#$%^&*'
-
+- [example_config](./docs/example_config.md) dokumanini takip edin.
 - Sistem için gerekli olan python paketlerini aşağıdaki komut ile yükleyin.
 
         pip install -r requirements.txt

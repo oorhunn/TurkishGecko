@@ -1,19 +1,21 @@
 import datetime
 
 from binance.client import Client
-from config import Config
 import json
 import string
 
 
 class BinanceService:
-    def init_app(self, Config):
-        self.Config = Config
-        self.client = Client(Config.API_KEY, Config.API_SECRET)
+    def init_app(self, app):
+        self.Config = app.config
+        self.client = self._get_client()
+
+    def _get_client(self):
+        return Client(self.Config.get('API_KEY'), self.Config.get('API_SECRET'))
 
     def get_client(self):
         if not self.client:
-            self.client = Client(self.Config.API_KEY, self.Config.API_SECRET)
+            self.client = self._get_client()
         return self.client
 
     def get_coin_data(self, coin, interval, startdate):
