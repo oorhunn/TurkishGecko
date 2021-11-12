@@ -14,7 +14,7 @@ from flask import render_template
 
 from flask import Flask
 from flaskr.config import init_config
-from flaskr.routes import init_routes
+from flaskr.routes.routes import init_routes
 from services.binance_service import binance_service
 
 print('here')

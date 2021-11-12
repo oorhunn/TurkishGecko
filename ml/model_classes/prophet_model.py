@@ -14,7 +14,7 @@ class Model:
         additional_feature=None,
         market=None,
         growth="logistic",
-        seasonality_mode="additive",
+        seasonality_mode="multiplicative",
         changepoint_range=0.9,
         changepoint_prior_scale=0.01,
         seasonality_prior_scale=10,
