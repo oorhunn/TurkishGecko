@@ -44,4 +44,5 @@ flask-sqlalchemy
 Flask-Migrate
 pystan==2.19.1.1
 prophet==1.0.1
+pydantic==1.8.2
 

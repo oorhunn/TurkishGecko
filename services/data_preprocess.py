@@ -142,18 +142,29 @@ class ProphetProcess:
             i = i + 1
         return empty
 
+    @staticmethod
+    def _get_highest(df):
+        return df['High']
+
     def get_prophet_data(self, coin):
         tempdata = binance_service.get_prophet_data(coin)
         daily = only_basic_pre_process(tempdata['14 Day Daily KLines'])
         fourhour = only_basic_pre_process(tempdata['7 Day 4Hour KLines'])
         onehour = only_basic_pre_process(tempdata['4 Day 1Hour KLines'])
         fiftmins = only_basic_pre_process(tempdata['2 Day 15Min KLines'])
-        prophet_service.refactor_data(daily)
-        prophet_service.refactor_data(fourhour)
-        prophet_service.refactor_data(onehour)
-        prophet_service.refactor_data(fiftmins)
-        frames = [daily, fourhour, onehour, fiftmins]
-        result = pd.concat(frames)
+
+        # [ds, y, 4s...., 1s..., 15d....]
+        # highest
+
+        # prophet_service.refactor_data(daily)
+        # prophet_service.refactor_data(fourhour)
+        # prophet_service.refactor_data(onehour)
+        # prophet_service.refactor_data(fiftmins)
+        _1g = daily[['Open Time', 'High']]
+        _4s = self._get_highest(fourhour)
+        _1s = self._get_highest(onehour)
+        _15m = self._get_highest(fiftmins)
+        result = pd.concat([_1g, _4s, _1s, _15m], axis=1)
         day = datetime.now().day
         month = datetime.now().month
         year = datetime.now().year

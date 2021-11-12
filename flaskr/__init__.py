@@ -1,5 +1,5 @@
 import datetime
-# import os
+import os
 from flask import render_template
 # from flask import render_template, session, send_from_directory, url_for, request, redirect
 
@@ -29,6 +29,7 @@ print(app.config)
 client = binance_service.get_client()
 # res = client.get_exchange_info()
 systemstatus = client.get_system_status()
+error = None
 if systemstatus['status'] != 0 and systemstatus['msg'] != 'normal':
     error = 'System is offline'
 
