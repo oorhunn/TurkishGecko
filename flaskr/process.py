@@ -48,7 +48,7 @@ def basicpreprocess(filename):
 def prophetpreprocess():
     coin = session['prophet coin']
     prophet_service.get_prophet_data(coin)
-    return redirect('/succes')
+    return redirect('/health-check')
 
 @bp.route('/updateprophetdata/<string:filename>')
 def update_prophet_data(filename):

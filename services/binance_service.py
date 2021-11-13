@@ -3,9 +3,14 @@ import datetime
 from binance.client import Client
 import json
 import string
+from config.constants import *
 
 
 class BinanceService:
+    def __init__(self, config=None):
+        self.client = None
+        self.Config = config
+
     def init_app(self, app):
         self.Config = app.config
         self.client = self._get_client()
@@ -43,16 +48,28 @@ class BinanceService:
             self.client = Client(self.Config.API_KEY, self.Config.API_SECRET)
         today = datetime.date.today()
         tempyesterday = today - datetime.timedelta(days=1)
-        lastfourteenday = str(tempyesterday - datetime.timedelta(days=13))
-        lastsevenday = str(tempyesterday - datetime.timedelta(days=6))
-        lastfourday = str(tempyesterday - datetime.timedelta(days=3))
-        lasttwoday = str(tempyesterday - datetime.timedelta(days=1))
+        lastfourteenday = str(tempyesterday - datetime.timedelta(days=14))
+        lastsevenday = str(tempyesterday - datetime.timedelta(days=7))
+        lastfourday = str(tempyesterday - datetime.timedelta(days=4))
+        lasttwoday = str(tempyesterday - datetime.timedelta(days=2))
         yesterday = str(tempyesterday)
 
-        dayklines = self.client.get_historical_klines(coin, Client.KLINE_INTERVAL_1DAY, lastfourteenday, yesterday)
-        fourhourklines = self.client.get_historical_klines(coin, Client.KLINE_INTERVAL_4HOUR, lastsevenday, yesterday)
-        hourlyklines = self.client.get_historical_klines(coin, Client.KLINE_INTERVAL_1HOUR, lastfourday, yesterday)
-        fifteenminklines = self.client.get_historical_klines(coin, Client.KLINE_INTERVAL_15MINUTE, lasttwoday, yesterday)
+        dayklines = self.client.get_historical_klines(
+            symbol=coin, interval=Client.KLINE_INTERVAL_1DAY,
+            start_str=lastfourteenday, end_str=yesterday, limit=WINDOW_DAY
+        )
+        fourhourklines = self.client.get_historical_klines(
+            symbol=coin, interval=Client.KLINE_INTERVAL_4HOUR,
+            start_str=lastsevenday, end_str=yesterday, limit=WINDOW_4H
+        )
+        hourlyklines = self.client.get_historical_klines(
+            symbol=coin, interval=Client.KLINE_INTERVAL_1HOUR,
+            start_str=lastfourday, end_str=yesterday, limit=WINDOW_1H
+        )
+        fifteenminklines = self.client.get_historical_klines(
+            symbol=coin, interval=Client.KLINE_INTERVAL_15MINUTE,
+            start_str=lasttwoday, end_str=yesterday, limit=WINDOW_15M
+        )
 
         tempoutdata = {
             '14 Day Daily KLines': dayklines,
